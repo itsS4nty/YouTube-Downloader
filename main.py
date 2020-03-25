@@ -33,12 +33,14 @@ def downloadAudio():
         os.chdir(folder)
         mp4name = str(name.title)+".mp4"
         mp3name = str(name.title)+".mp3"
-        print(mp4name)
-        print(mp3name)
-        clip = mp.VideoFileClip("D:\\VideosDescargados\\Antonio Orozco, KAROL G - Dicen.mp4")
-        print("paso")
-        clip.audio.write_audiofile("D:\\VideosDescargados\\Antonio Orozco, KAROL G - Dicen.mp3")
-        print("paso")
+        clip = mp.VideoFileClip(mp4name)
+        clip.audio.write_audiofile(mp3name)
+        try:
+            del clip.reader
+            del clip
+            os.remove(mp4name)
+        except:
+            print("No existe el fichero")
         tkinter.messagebox.showinfo("Audio descargado", "Audio descargado con exito")
     except:
         tkinter.messagebox.showerror("Error en la descarga", "Ha habido un error en la descarga del audio")
